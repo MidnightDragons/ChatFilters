@@ -1,0 +1,61 @@
+{
+	"schemaVersion": 1,
+	"id": "chatfilters",
+	"version": "${version}",
+
+	"name": "ChatFilters",
+	"description": "",
+	"authors": [
+		{
+			"name": "MidnightKittens",
+			"contact": {
+				"discord": "midnightkittens"
+			}
+		}
+	],
+	"contact": {
+		"sources": "TBD"
+	},
+
+	"license": "MIT",
+	"icon": "icon.png",
+
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"org.midnight.chatfilters.client.ChatFiltersClient"
+		],
+		"modmenu": [
+			"org.midnight.chatfilters.client.ModMenuIntegration"
+		],
+		"main": [
+			"org.midnight.chatfilters.ChatFilters"
+		]
+	},
+	"mixins": [
+		{
+			"config": "chatfilters.client.mixins.json",
+			"environment": "client"
+		}
+	],
+
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"fabric-api": "*",
+		"minecraft": "${minecraft_version}",
+		"java": ">=25"
+	},
+	"suggests": {
+		"modmenu": "*",
+		"yet_another_config_lib_v3": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.curseforge": "TBD",
+				"modmenu.modrinth": "TBD",
+				"modmenu.github": "TBD"
+			}
+		}
+	}
+}

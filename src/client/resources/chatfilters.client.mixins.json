@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "org.midnight.chatfilters.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"ChatComponentMixin",
+		"PlayerTabOverlayMixin",
+		"EntityRendererMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
