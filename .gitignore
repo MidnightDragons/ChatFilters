@@ -41,3 +41,4 @@ replay_*.log
 
 # Xaero jars (not redistributable)
 libs/*.jar
+/CF

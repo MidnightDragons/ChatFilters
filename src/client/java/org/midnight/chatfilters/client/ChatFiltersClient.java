@@ -22,6 +22,7 @@ public class ChatFiltersClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ModConfig.load();
+		ChatScripts.reload();
 		ClientReceiveMessageEvents.MODIFY_GAME.register(
 				(message, overlay) -> overlay ? message : ChatFilter.apply(message, ChatFilter.Origin.SERVER)
 		);
@@ -32,9 +33,13 @@ public class ChatFiltersClient implements ClientModInitializer {
 			// /chatfilters reload
 			root.then(ClientCommands.literal("reload").executes(ctx -> {
 				boolean ok = ModConfig.load();
-				ctx.getSource().sendFeedback(Component.literal(ok
-						? "§aChat Filters config reloaded (" + ModConfig.INSTANCE.filters.size() + " filters)."
-						: "§cFailed to reload chatfilters.json! Keeping current config. Check the log."));
+				int scriptErrors = ChatScripts.reload();
+				ChatFilter.clearCache();
+				ctx.getSource().sendFeedback(Component.literal(
+						(ok ? "§aReloaded " + ModConfig.INSTANCE.filters.size() + " filter(s)"
+								: "§cFailed to reload chatfilters.json, keeping the current config")
+								+ ", §a" + ChatScripts.handlerCount() + " script handler(s)"
+								+ (scriptErrors > 0 ? "§c, " + scriptErrors + " script(s) have errors. Check the log." : "")));
 				return ok ? 1 : 0;
 			}));
 

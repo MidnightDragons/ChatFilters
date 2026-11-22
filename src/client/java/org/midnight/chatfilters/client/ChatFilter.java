@@ -82,7 +82,10 @@ public final class ChatFilter {
 
 		Component sender = senderOf(message);
 		Component current = message;
+		ChatScripts.Result scripted = ChatScripts.run(origin, current, sender);
+		current = scripted.component();
 		for (ModConfig.Filter filter : cfg.filters) {
+			if (scripted.stopped()) break;
 			if (filter == null || !filter.enabled) continue;
 			if (filter.sources == null || !filter.sources.contains(origin)) continue;
 			try {
@@ -356,5 +359,84 @@ public final class ChatFilter {
 		if (mode == Clear.COLOR || mode == Clear.BOTH) s = s.replaceAll("(?i)§x(§[0-9a-f]){6}|§[0-9a-f]", "");
 		if (mode == Clear.BOTH) s = s.replaceAll("(?i)§r", "");
 		return s;
+	}
+
+	/** SCRIPTING: Applies one pattern + replacement. Null if it didn't match. */
+	static Component applyPattern(String pattern, String replacement, Component message, Component sender) {
+		ModConfig.Filter f = new ModConfig.Filter();
+		f.pattern = pattern;
+		f.replacement = replacement;
+		try {
+			return applyOne(f, message, sender);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	/** SCRIPTING: Text of group n (0 = whole match), or null. */
+	static String groupText(String pattern, Component message, Component sender, int n) {
+		try {
+			Expanded ex = expand(pattern, sender == null ? null : sender.getString());
+			Matcher m = Pattern.compile(ex.regex()).matcher(message.getString());
+			if (!m.find()) return null;
+
+			int g = n;
+			if (g > 0 && ex.playerGroup() > 0 && g >= ex.playerGroup()) g++;   // skip the hidden $P group
+			if (g > m.groupCount() || m.start(g) == -1) return null;
+			return m.group(g);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	static List<String> onlineNames() {
+		Set<String> set = new LinkedHashSet<>();
+		ClientPacketListener conn = Minecraft.getInstance().getConnection();
+		if (conn != null) {
+			for (PlayerInfo info : conn.getOnlinePlayers()) set.add(info.getProfile().name());
+		}
+
+		set.addAll(TEST_PLAYERS);
+		List<String> names = new ArrayList<>(set);
+		names.sort((a, b) -> b.length() - a.length());   // longest first
+		return names;
+	}
+
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
+	private static boolean isNameChar(char c) {
+		return c == '_' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+	}
+
+	/** Leftmost player name in the text as {start, end}, or null. loose = may be glued to the text before it. */
+	static int[] findPlayer(String text, String senderName, boolean loose) {
+		if (senderName != null) {
+			int i = text.indexOf(senderName);
+			return i < 0 ? null : new int[]{i, i + senderName.length()};
+		}
+
+		int bestStart = -1, bestEnd = -1;
+		for (String name : onlineNames()) {
+			int from = 0;
+			while (true) {
+				int i = text.indexOf(name, from);
+				if (i < 0) break;
+
+				int e = i + name.length();
+				boolean leftOk = loose || i == 0 || !isNameChar(text.charAt(i - 1));
+				boolean rightOk = e >= text.length() || !isNameChar(text.charAt(e));
+				if (leftOk && rightOk) {
+					if (bestStart < 0 || i < bestStart) {
+						bestStart = i;
+						bestEnd = e;
+					}
+
+					break;
+				}
+
+				from = i + 1;
+			}
+		}
+
+		return bestStart < 0 ? null : new int[]{bestStart, bestEnd};
 	}
 }

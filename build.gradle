@@ -42,6 +42,8 @@ dependencies {
 	clientImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 	clientImplementation "dev.isxander:yet-another-config-lib:3.9.4+26.2-fabric"
 	clientCompileOnly fileTree(dir: "libs", include: "*.jar")
+	implementation 'org.mozilla:rhino:1.7.15.1'
+	include "org.mozilla:rhino:1.7.15.1"
 }
 
 processResources {

@@ -60,7 +60,6 @@ public class ModConfig {
 
 	public static boolean load() {
 		if (!CONFIG_FILE.exists()) {
-			INSTANCE.filters.add(new Filter());
 			save();
 			return true;
 		}

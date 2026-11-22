@@ -5,7 +5,7 @@
 	"client": [
 		"ChatComponentMixin",
 		"PlayerTabOverlayMixin",
-		"EntityRendererMixin"
+		"LevelExtractorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
