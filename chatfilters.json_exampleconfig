@@ -1,0 +1,424 @@
+{
+	"enabled": true,
+	"debug": false,
+	"filters": [
+		{
+			"name": "Strip §k",
+			"group": "Chat",
+			"enabled": true,
+			"stopOnMatch": false,
+			"pattern": "(?s)^(.*?)§k(.*)$",
+			"replacement": "$1$2",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathlands to Vanilla (DISCORD)",
+			"group": "Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^\\[(Discord)\\s*\\|\\s*([^\\]]+)\\]\\s*(.+?)((?:\\s+\\(replying to [^)]*\\))?)\\s*»\\s*(.*)$",
+			"replacement": "§r$[${[\uEB14\uEB13$}$]§3$3§r$[${$4] $5$}$]",
+			"sources": [
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathlands to Vanilla",
+			"group": "Chat",
+			"enabled": false,
+			"stopOnMatch": false,
+			"pattern": "^(?!\\s*(?:§.)*<)\\s*([^:]*?\\s*)($P)((?:\\s+[^:\\s][^:]*?)?)\\s*:\\s*(.*)$",
+			"replacement": "§f<§r$1$2$3§f> §r$4",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathlands to Vanilla (LESS FORMATTING)",
+			"group": "Chat",
+			"enabled": true,
+			"stopOnMatch": false,
+			"pattern": "^(?!\\s*(?:§.)*<)\\s*([^:]*?\\s*)($p)((?:\\s+[^:\\s][^:]*?)?)\\s*:\\s*(.*)$",
+			"replacement": "§f<§r$1$[$2$]$3§f> §r$[${$4$}$]",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathlands to Vanilla (NO FORMATTING)",
+			"group": "Chat",
+			"enabled": false,
+			"stopOnMatch": false,
+			"pattern": "^(?!\\s*(?:§.)*<)\\s*([^:]*?\\s*)($p)((?:\\s+[^:\\s][^:]*?)?)\\s*:\\s*(.*)$",
+			"replacement": "§r$[${<$1$2$3> $4$}$]",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathlands to Vanilla (NO FORMATTING - NO TAG)",
+			"group": "Chat",
+			"enabled": false,
+			"stopOnMatch": false,
+			"pattern": "^(?!\\s*(?:§.)*<)\\s*([^:]*?\\s*)($p)((?:\\s+[^:\\s][^:]*?)?)\\s*:\\s*(.*)$",
+			"replacement": "§r$[${<$1$2> $4$}$]",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Owner",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Owner) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB00$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Head Admin",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Head Admin) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB01$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Admin",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Admin) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB02$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Developer",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Developer) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB03$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Head Moderator",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Head Moderator) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB04$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Sr. Moderator",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Sr\\. Moderator) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB05$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Jr. Moderator",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Jr\\. Moderator) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB07$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Moderator",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Moderator) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB06$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathbound",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Oathbound) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB09$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathbreaker",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Oathbreaker) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB10$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathkeeper",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Oathkeeper) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB11$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Oathful",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^((?:.)*<(?:.)*)(Oathful) (?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB12$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Any Other Rank",
+			"group": "Oathlands Ranks",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "^(.*?<(?:§.)*)([^§\\s>][^>]*?)\\s*(?=$P)(.*)$",
+			"replacement": "$1$(2§f\uEB08$)§f\uEB13$3",
+			"sources": [
+				"PLAYER",
+				"SERVER"
+			]
+		},
+		{
+			"name": "Nametag - Strip Legacy Codes",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": false,
+			"pattern": "(?s)^(.*)$",
+			"replacement": "$[${$1$}$]",
+			"sources": [
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Plain Usernames",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": false,
+			"pattern": "(?s)^(.*?)$P(.*?)$",
+			"replacement": "$[${$1$p$}$]",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Owner",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Owner (?=$P)(.*)$",
+			"replacement": "\uEB00\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Head Admin",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Head Admin (?=$P)(.*)$",
+			"replacement": "\uEB01\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Admin",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Admin (?=$P)(.*)$",
+			"replacement": "\uEB02\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Developer",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Developer (?=$P)(.*)$",
+			"replacement": "\uEB03\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Head Moderator",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Head Moderator (?=$P)(.*)$",
+			"replacement": "\uEB04\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Sr. Moderator",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Sr\\. Moderator (?=$P)(.*)$",
+			"replacement": "\uEB05\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Jr. Moderator",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Jr\\. Moderator (?=$P)(.*)$",
+			"replacement": "\uEB07\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Moderator",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Moderator (?=$P)(.*)$",
+			"replacement": "\uEB06\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Oathbound",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Oathbound (?=$P)(.*)$",
+			"replacement": "\uEB09\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Oathbreaker",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Oathbreaker (?=$P)(.*)$",
+			"replacement": "\uEB10\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Oathkeeper",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Oathkeeper (?=$P)(.*)$",
+			"replacement": "\uEB11\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Oathful",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.*?Oathful (?=$P)(.*)$",
+			"replacement": "\uEB12\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Any Other Rank",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^.+?(?=$P)(.*)$",
+			"replacement": "\uEB08\uEB13$1",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		},
+		{
+			"name": "Glued rank (fallback)",
+			"group": "Oathlands Non-Chat",
+			"enabled": true,
+			"stopOnMatch": true,
+			"pattern": "(?s)^[^A-Za-z0-9]*[A-Z]{3,}?$N.*$",
+			"replacement": "\uEB08\uEB13$[${$p$}$]",
+			"sources": [
+				"TAB_LIST",
+				"NAMETAG"
+			]
+		}
+	]
+}
