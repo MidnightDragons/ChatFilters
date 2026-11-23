@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 
@@ -77,9 +76,9 @@ public class ChatFiltersClient implements ClientModInitializer {
 		try {
 			String raw = inline;
 			if (raw == null) {
-				Path file = FabricLoader.getInstance().getConfigDir().resolve("chatfilters_test.json");
+				Path file = ModConfig.DIR.resolve("test.json");
 				if (!Files.exists(file)) {
-					src.sendFeedback(Component.literal("§cNo JSON given, and config/chatfilters_test.json doesn't exist."));
+					src.sendFeedback(Component.literal("§cNo JSON given, and config/chatfilters/test.json doesn't exist."));
 					return 0;
 				}
 

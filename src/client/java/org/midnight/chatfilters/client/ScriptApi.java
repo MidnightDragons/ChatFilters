@@ -16,7 +16,7 @@ public final class ScriptApi {
 	public void nametag(Function handler)	{ on("nametag", handler); }
 
 	public void log(Object message) {
-		ChatScripts.LOG.info("[script] {}", Context.toString(message));
+		DebugLog.write("scripts", Context.toString(message));
 	}
 
 	public int skipSpaces(String s, int i) {

@@ -37,7 +37,12 @@ public final class ChatFilter {
 	}
 
 	private static void debug(Origin origin, Component message) {
-		org.slf4j.LoggerFactory.getLogger("ChatFilters").info("{}: {}", origin, escaped(message.getString()));
+		String text = escaped(message.getString());
+		switch (origin) {
+			case PLAYER -> DebugLog.write("chat", "[SIGNED] " + text);
+			case SERVER -> DebugLog.write("chat", "[UNSIGNED] " + text);
+			default -> DebugLog.write(origin.name().toLowerCase(), text);
+		}
 	}
 
 	/** Nametags: filtered through the cache, and logged (with the entity type) when debug is on. */
@@ -46,8 +51,7 @@ public final class ChatFilter {
 
 		ModConfig cfg = ModConfig.INSTANCE;
 		if (cfg != null && cfg.debug && !CACHE.containsKey(new CacheKey(text, Origin.NAMETAG))) {
-			org.slf4j.LoggerFactory.getLogger("ChatFilters")
-					.info("NAMETAG ({}): {}", entityType, escaped(text.getString()));
+			DebugLog.write("nametag", "(" + entityType + ") " + escaped(text.getString()));
 		}
 
 		return applyCached(text, Origin.NAMETAG);

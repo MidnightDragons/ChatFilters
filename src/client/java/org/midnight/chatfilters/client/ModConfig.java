@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ import org.slf4j.LoggerFactory;
 
 public class ModConfig {
 	private static final Logger LOG = LoggerFactory.getLogger("ChatFilters");
-	private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "chatfilters.json");
+	public static final Path DIR = FabricLoader.getInstance().getConfigDir().resolve("chatfilters");
+	private static final File CONFIG_FILE = DIR.resolve("config.json").toFile();
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 	public static ModConfig INSTANCE = new ModConfig();
 
@@ -91,6 +93,7 @@ public class ModConfig {
 
 	public static void save() {
 		try {
+			Files.createDirectories(DIR);
 			StringWriter sw = new StringWriter();
 			try (JsonWriter writer = new JsonWriter(sw)) {
 				writer.setIndent("\t");

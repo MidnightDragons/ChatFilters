@@ -1,6 +1,5 @@
 package org.midnight.chatfilters.client;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
@@ -25,7 +24,7 @@ public final class ChatScripts {
 
 	static final Logger LOG = LoggerFactory.getLogger("ChatFilters");
 
-	private static final Path DIR = FabricLoader.getInstance().getConfigDir().resolve("chatfilters");
+	private static final Path DIR = ModConfig.DIR.resolve("scripts");
 	private static final Map<ChatFilter.Origin, List<Function>> HANDLERS = new EnumMap<>(ChatFilter.Origin.class);
 	private static final ContextFactory FACTORY = new Factory();
 	private static Scriptable globalScope;
@@ -141,11 +140,15 @@ public final class ChatScripts {
 	}
 
 	private static void report(String where, Throwable t) {
+		String line;
 		if (t instanceof RhinoException re) {
-			LOG.error("[script] {}:{}  {}", re.sourceName(), re.lineNumber(), re.details());
+			line = re.sourceName() + ":" + re.lineNumber() + "  " + re.details();
 		} else {
-			LOG.error("[script] {}: {}", where, t.toString());
+			line = where + ": " + t;
 		}
+
+		LOG.error("[script] {}", line);
+		DebugLog.write("scripts", "ERROR " + line);
 	}
 
 	public static int handlerCount() {
