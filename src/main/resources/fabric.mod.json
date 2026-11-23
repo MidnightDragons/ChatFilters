@@ -14,7 +14,7 @@
 		}
 	],
 	"contact": {
-		"sources": "TBD"
+		"sources": "https://github.com/MidnightDragons/ChatFilters"
 	},
 
 	"license": "MIT",
@@ -54,7 +54,8 @@
 			"links": {
 				"modmenu.curseforge": "TBD",
 				"modmenu.modrinth": "TBD",
-				"modmenu.github": "TBD"
+				"modmenu.github": "https://github.com/MidnightDragons/ChatFilters",
+				"modmenu.discord": "https://discord.gg/8wjktTt"
 			}
 		}
 	}
