@@ -26,7 +26,7 @@
 			"org.midnight.chatfilters.client.ChatFiltersClient"
 		],
 		"modmenu": [
-			"org.midnight.chatfilters.client.ModMenuIntegration"
+			"org.midnight.chatfilters.client.config.ModMenuIntegration"
 		],
 		"main": [
 			"org.midnight.chatfilters.ChatFilters"

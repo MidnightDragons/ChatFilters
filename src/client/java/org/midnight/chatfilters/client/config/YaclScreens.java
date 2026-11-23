@@ -1,4 +1,4 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.config;
 
 import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.ConfigCategory;
@@ -9,12 +9,13 @@ import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.midnight.chatfilters.client.filter.ChatFilter;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public final class YaclScreens {
-
 	public static boolean isLoaded() {
 		try {
 			Class.forName("dev.isxander.yacl3.api.YetAnotherConfigLib");
@@ -26,7 +27,6 @@ public final class YaclScreens {
 
 	public static Screen create(Screen parent) {
 		ModConfig cfg = ModConfig.INSTANCE;
-
 		ConfigCategory.Builder general = ConfigCategory.createBuilder()
 				.name(Component.literal("General"))
 				.option(toggle("Enable Chat Filters", "Turns every filter on or off.", true,
@@ -53,14 +53,16 @@ public final class YaclScreens {
 							ModConfig.load();
 							ChatFilter.clearCache();
 						})
-						.build());
+						.build())
+		;
 
 		return YetAnotherConfigLib.createBuilder()
 				.title(Component.literal("Chat Filters"))
 				.save(ModConfig::save)
 				.category(general.build())
 				.build()
-				.generateScreen(parent);
+				.generateScreen(parent)
+		;
 	}
 
 	private static Option<Boolean> toggle(String name, String tip, boolean def, Supplier<Boolean> get, Consumer<Boolean> set) {
@@ -69,6 +71,7 @@ public final class YaclScreens {
 				.description(OptionDescription.of(Component.literal(tip)))
 				.binding(def, get, set)
 				.controller(TickBoxControllerBuilder::create)
-				.build();
+				.build()
+		;
 	}
 }

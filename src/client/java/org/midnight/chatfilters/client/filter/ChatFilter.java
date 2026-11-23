@@ -1,4 +1,4 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.filter;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -9,6 +9,9 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.network.chat.HoverEvent;
+import org.midnight.chatfilters.client.config.ModConfig;
+import org.midnight.chatfilters.client.misc.DebugLog;
+import org.midnight.chatfilters.client.script.ChatScripts;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -79,6 +82,7 @@ public final class ChatFilter {
 		CACHE.clear();
 	}
 
+	@SuppressWarnings("ConstantValue")
 	public static Component apply(Component message, Origin origin) {
 		ModConfig cfg = ModConfig.INSTANCE;
 		if (message == null || cfg == null || !cfg.enabled || cfg.filters == null) return message;
@@ -366,7 +370,7 @@ public final class ChatFilter {
 	}
 
 	/** SCRIPTING: Applies one pattern + replacement. Null if it didn't match. */
-	static Component applyPattern(String pattern, String replacement, Component message, Component sender) {
+	public static Component applyPattern(String pattern, String replacement, Component message, Component sender) {
 		ModConfig.Filter f = new ModConfig.Filter();
 		f.pattern = pattern;
 		f.replacement = replacement;
@@ -378,7 +382,7 @@ public final class ChatFilter {
 	}
 
 	/** SCRIPTING: Text of group n (0 = whole match), or null. */
-	static String groupText(String pattern, Component message, Component sender, int n) {
+	public static String groupText(String pattern, Component message, Component sender, int n) {
 		try {
 			Expanded ex = expand(pattern, sender == null ? null : sender.getString());
 			Matcher m = Pattern.compile(ex.regex()).matcher(message.getString());
@@ -412,7 +416,7 @@ public final class ChatFilter {
 	}
 
 	/** Leftmost player name in the text as {start, end}, or null. loose = may be glued to the text before it. */
-	static int[] findPlayer(String text, String senderName, boolean loose) {
+	public static int[] findPlayer(String text, String senderName, boolean loose) {
 		if (senderName != null) {
 			int i = text.indexOf(senderName);
 			return i < 0 ? null : new int[]{i, i + senderName.length()};

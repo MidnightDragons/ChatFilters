@@ -1,4 +1,4 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.misc;
 
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -26,7 +26,6 @@ public final class DebugLog {
 			Path file = DIR.resolve(channel + ".log");
 
 			if (STARTED.add(channel)) {
-				// fresh file each launch
 				Files.writeString(file, "", StandardCharsets.UTF_8,
 						StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 			}
@@ -34,7 +33,7 @@ public final class DebugLog {
 			Files.writeString(file, "[" + LocalTime.now().format(TIME) + "] " + line + System.lineSeparator(),
 					StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 		} catch (IOException ignored) {
-			// logging must never break chat
+			// logging should never break chat :)
 		}
 	}
 }

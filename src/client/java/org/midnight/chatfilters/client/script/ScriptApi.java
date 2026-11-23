@@ -1,5 +1,6 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.script;
 
+import org.midnight.chatfilters.client.misc.DebugLog;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 

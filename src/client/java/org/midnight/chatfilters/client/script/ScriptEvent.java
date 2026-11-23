@@ -1,6 +1,7 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.script;
 
 import net.minecraft.network.chat.Component;
+import org.midnight.chatfilters.client.filter.ChatFilter;
 
 @SuppressWarnings("unused")
 public final class ScriptEvent {

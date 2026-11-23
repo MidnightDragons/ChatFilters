@@ -1,10 +1,11 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.config;
 
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.midnight.chatfilters.client.filter.ChatFilter;
 
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -13,6 +14,15 @@ public class FilterScreen extends Screen {
 	private ModConfig working;
 	private final Screen parent;
 	private int index = 0;
+
+	private static final String[] HINTS = {
+			"$1, $2, (...): Regex groups",
+			"$p: Player that sent the message",
+			"$P: Any online player",
+			"$[ between $]: Clear formatting",
+			"${ between $}: Clear colours",
+			"$(# between $): Hover (shows the original group of #)"
+	};
 
 	public FilterScreen(Screen parent) {
 		super(Component.literal("Chat Filters"));
@@ -93,7 +103,9 @@ public class FilterScreen extends Screen {
 		y += 24;
 
 		if (cfg.filters.isEmpty()) {
-			addRenderableWidget(new StringWidget(left, y, w, 12, Component.literal("No filters yet."), this.font));
+			Component none = Component.literal("No filters yet.");
+			int textWidth = this.font.width(none);
+			addRenderableWidget(new StringWidget(this.width / 2 - textWidth / 2, y, textWidth, 12, none, this.font));
 		} else {
 			index = Math.clamp(index, 0, cfg.filters.size() - 1);
 			ModConfig.Filter f = cfg.filters.get(index);
@@ -193,42 +205,29 @@ public class FilterScreen extends Screen {
 		}
 
 		y += 24;
+		int addY = Math.max(y, this.height - 8 - HINTS.length * 12 - 8 - 20);
 
 		// Add
 		addRenderableWidget(Button.builder(Component.literal("Add Filter"), _ -> {
 			cfg.filters.add(new ModConfig.Filter());
 			index = cfg.filters.size() - 1;
 			rebuildWidgets();
-		}).bounds(left, y, half, 20).build());
+		}).bounds(left, addY, half, 20).build());
 
 		// Delete
 		Button del = Button.builder(Component.literal("Delete Filter"), _ -> {
 			cfg.filters.remove(index);
 			rebuildWidgets();
-		}).bounds(left + half + 4, y, half, 20).build();
+		}).bounds(left + half + 4, addY, half, 20).build();
 		del.active = !cfg.filters.isEmpty();
 		addRenderableWidget(del);
-		y += 28;
 
 		// Hints
-		addRenderableWidget(new StringWidget(left, y, w, 12,
-				Component.literal("$1, $2, (...): Regex groups"), this.font));
-		y += 12;
-		addRenderableWidget(new StringWidget(left, y, w, 12,
-				Component.literal("$p: Player that sent the message"), this.font));
-		y += 12;
-		addRenderableWidget(new StringWidget(left, y, w, 12,
-				Component.literal("$P: Any online player"), this.font));
-		y += 12;
-		addRenderableWidget(new StringWidget(left, y, w, 12,
-				Component.literal("$[ between $]: Clear formatting"), this.font));
-		y += 12;
-		addRenderableWidget(new StringWidget(left, y, w, 12,
-				Component.literal("${ between $}: Clear colours"), this.font));
-		y += 12;
-		addRenderableWidget(new StringWidget(left, y, w, 12,
-				Component.literal("$(# between $) hover shows the original group of #"), this.font));
-//		y += 12;
+		int hintY = addY + 28;
+		for (String hint : HINTS) {
+			addRenderableWidget(new StringWidget(left, hintY, w, 12, Component.literal(hint), this.font));
+			hintY += 12;
+		}
 	}
 
 	@Override

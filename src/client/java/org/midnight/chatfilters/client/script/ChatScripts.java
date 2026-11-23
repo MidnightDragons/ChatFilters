@@ -1,6 +1,9 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.script;
 
 import net.minecraft.network.chat.Component;
+import org.midnight.chatfilters.client.filter.ChatFilter;
+import org.midnight.chatfilters.client.misc.DebugLog;
+import org.midnight.chatfilters.client.config.ModConfig;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;

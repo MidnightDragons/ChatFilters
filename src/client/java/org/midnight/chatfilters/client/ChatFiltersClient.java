@@ -11,6 +11,9 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
+import org.midnight.chatfilters.client.config.ModConfig;
+import org.midnight.chatfilters.client.filter.ChatFilter;
+import org.midnight.chatfilters.client.script.ChatScripts;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

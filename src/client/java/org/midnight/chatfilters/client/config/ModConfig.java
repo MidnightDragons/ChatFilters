@@ -1,4 +1,4 @@
-package org.midnight.chatfilters.client;
+package org.midnight.chatfilters.client.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.midnight.chatfilters.client.filter.ChatFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,12 +41,12 @@ public class ModConfig {
 		public boolean stopOnMatch = true;
 		public String pattern = "";
 		public String replacement = "";
-		public Set<ChatFilter.Origin> sources = new LinkedHashSet<>(List.of(ChatFilter.Origin.PLAYER, ChatFilter.Origin.SERVER));
+		public final Set<ChatFilter.Origin> sources = new LinkedHashSet<>(List.of(ChatFilter.Origin.PLAYER, ChatFilter.Origin.SERVER));
 
 		private transient String lastRegex;
 		private transient Pattern lastPattern;
 
-		Pattern compiledFor(String regex) {
+		public Pattern compiledFor(String regex) {
 			if (!regex.equals(lastRegex)) {
 				lastRegex = regex;
 				try {
