@@ -5,14 +5,12 @@
 
 	"name": "ChatFilters",
 	"description": "",
-	"authors": [
-		{
-			"name": "MidnightKittens",
-			"contact": {
-				"discord": "midnightkittens"
-			}
+	"authors": [{
+		"name": "MidnightKittens",
+		"contact": {
+			"discord": "https://discord.gg/8wjktTt"
 		}
-	],
+	}],
 	"contact": {
 		"sources": "https://github.com/MidnightDragons/ChatFilters"
 	},
@@ -49,6 +47,7 @@
 		"modmenu": "*",
 		"yet_another_config_lib_v3": "*"
 	},
+
 	"custom": {
 		"modmenu": {
 			"links": {
